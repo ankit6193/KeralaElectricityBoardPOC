@@ -20,7 +20,7 @@ function buttonClicked (position) {
   console.log(position);
 }
 
-const MyPopupMarker = ({ map, position, children }) => (
+const MyPopupMarker = ({ map, position, value }) => (
   <Marker map={map} position={position}>
       <Popup>
         <Button  variant="contained" color="primary" onClick = {() => buttonClicked(position)} > Turn On </Button>
@@ -39,9 +39,43 @@ const MyMarkersList = ({ map, markers }) => {
 //   [[51.5, -0.1], [51.5, -0.12], [51.52, -0.12]],
 //   [[51.5, -0.05], [51.5, -0.06], [51.52, -0.06]],
 // ]
-
+const data = {
+              "1":
+                {
+                  point : [9.86079307, 76.69274206],
+                  value : 1
+                },
+              "2":
+                {
+                  point :[9.90681485, 76.72578682],
+                  value : 0
+                },
+              "3":
+                {
+                  point :[9.90338131, 76.72379337],
+                  value : 1
+                }
+            }
 function getPointsData() {
   return [[9.86079307, 76.69274206], [9.90681485, 76.72578682], [9.90338131, 76.72379337]];
+}
+
+
+function setData() {
+
+  var points = [];
+  var markers = [];
+  var index = 1;
+  Object.keys(data).forEach(function(k){
+    console.log(data[k]);
+    points.push(data[k].point);
+    if(data[k].value == 1){
+      markers.push({key: 'marker'.index, position: data[k].point, value: data[k].value})
+    }
+    index++;
+  })
+
+  return [points,markers];
 }
 
 
@@ -58,13 +92,15 @@ export default class VectorLayersExample extends Component<{}> {
   
 
   componentDidMount(){
-    var point = getPointsData();
+
+    var result = setData();
+    var point = result[0];
     // var lines = getLinesData();
     // var abs = getABData();
     
     
     
-    var markersData = this.setMarkerData(point);
+    var markersData = result[1];
     this.setState({
       point : point,
       lines : "",
@@ -74,16 +110,7 @@ export default class VectorLayersExample extends Component<{}> {
    
   }
 
-  setMarkerData(point) {
-    var markersArray = [];
-    var index = 1;
-    point.forEach(element => {
-        markersArray.push({key: 'marker'.index, position: element, children: 'Mypopup'.index})
-        index++;
-    });
-
-    return markersArray;
-  }
+  
   render() {
 
     return (
