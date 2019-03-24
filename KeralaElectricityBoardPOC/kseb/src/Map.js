@@ -13,9 +13,6 @@ import Button from '@material-ui/core/Button';
 
 const center = [9.8, 76.5]
 
-const polyline = [[9.86079307, 76.69274206], [9.90681485, 76.72578682], [9.90338131, 76.72379337]]
-//const secondpolyline = [[9.86079307, 76.69274206],[9.90338131, 76.72379337]]
-
 function buttonClicked (position) {
   console.log(position);
 }
@@ -35,10 +32,6 @@ const MyMarkersList = ({ map, markers }) => {
   return <div style={{display: 'none'}}>{items}</div>;
 };
 
-// const multiPolyline = [
-//   [[51.5, -0.1], [51.5, -0.12], [51.52, -0.12]],
-//   [[51.5, -0.05], [51.5, -0.06], [51.52, -0.06]],
-// ]
 const data = {
               "1":
                 {
@@ -54,11 +47,16 @@ const data = {
                 {
                   point :[9.90338131, 76.72379337],
                   value : 1
-                }
+                },
+                
+                // "9.86079307, 76.69274206" :
+                
+                // {
+                //     isAB : true,
+                //     state : "open",
+                //     dependency : [[key1,key2]]
+                // }
             }
-function getPointsData() {
-  return [[9.86079307, 76.69274206], [9.90681485, 76.72578682], [9.90338131, 76.72379337]];
-}
 
 
 function setData() {
